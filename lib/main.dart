@@ -1,10 +1,9 @@
+import 'package:demo_app_with_intigration/AuthPage/AuthPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -16,12 +15,13 @@ Future<void> main() async {
       statusBarBrightness: Brightness.light,
     ),
   );
-  runApp(
-    MultiProvider(
-      providers: [],
-      child: MyApp(),
-    ),
-  );
+  // runApp(
+  //   MultiProvider(
+  //     providers: [],
+  //     child: MyApp(),
+  //   ),
+  // );
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -42,10 +42,11 @@ class _MyAppState extends State<MyApp> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
-            User? user = snapshot.data;
-            // If the user is null, we're not authenticated
+            return AuthPage();
           }
-          return CircularProgressIndicator();
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
       // theme: ThemeData(
