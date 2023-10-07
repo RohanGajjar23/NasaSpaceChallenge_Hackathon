@@ -10,6 +10,16 @@ class AuthPage extends StatefulWidget {
 class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final size = MediaQuery.of(context).size;
+    return SingleChildScrollView(
+      child: Container(
+        width: size.width,
+        height: size.height,
+        color: Theme.of(context).colorScheme.background,
+        child: Column(
+          children: [],
+        ),
+      ),
+    );
   }
 }
