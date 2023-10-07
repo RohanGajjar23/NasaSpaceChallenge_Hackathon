@@ -5,6 +5,15 @@ class Screen_Five extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Center(
+      child: Text(
+        "Nothing yet",
+        style: Theme.of(context)
+            .textTheme
+            .bodyLarge!
+            .copyWith(color: Theme.of(context).colorScheme.onBackground),
+      ),
+    );
+    ;
   }
 }
