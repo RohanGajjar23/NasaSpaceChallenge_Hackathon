@@ -50,9 +50,9 @@ class MenuRow extends StatelessWidget {
           ),
         ),
 
-        CupertinoButton(
+        MaterialButton(
           padding: const EdgeInsets.all(12),
-          pressedOpacity: 1, // disable touch effect
+          // pressedOpacity: 1, // disable touch effect
           onPressed: onMenuPressed,
           child: Row(
             children: [

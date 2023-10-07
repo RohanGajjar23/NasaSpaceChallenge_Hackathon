@@ -61,13 +61,13 @@ class _CustomTabBarState extends State<CustomTabBar> {
           decoration: BoxDecoration(
             color: RiveAppTheme.background2.withOpacity(0.6),
             borderRadius: BorderRadius.circular(24),
-            // boxShadow: [
-            //   BoxShadow(
-            //     color: const Color.fromARGB(255, 79, 102, 173).withOpacity(0.1),
-            //     blurRadius: 20,
-            //     offset: const Offset(0, 20),
-            //   )
-            // ],
+            boxShadow: [
+              BoxShadow(
+                color: const Color.fromARGB(255, 79, 102, 173).withOpacity(0.1),
+                blurRadius: 20,
+                offset: const Offset(0, 20),
+              )
+            ],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

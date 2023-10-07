@@ -86,6 +86,8 @@ flutter:
   assets:
     - assets/animations/Login.json
     - assets/rive/icons.riv
+    - assets/images/space.jpg
+    - assets/images/mercury.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
