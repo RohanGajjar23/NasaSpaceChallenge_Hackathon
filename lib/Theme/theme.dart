@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
-  textTheme: GoogleFonts.comfortaaTextTheme(),
+  textTheme: GoogleFonts.rajdhaniTextTheme(),
   colorScheme: const ColorScheme.dark(
     background: Color.fromARGB(255, 0, 0, 0),
     onBackground: Colors.white,
