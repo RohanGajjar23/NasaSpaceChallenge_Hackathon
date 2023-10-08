@@ -93,6 +93,9 @@ flutter:
     - assets/rive/icons.riv
     - assets/images/space.jpg
     - assets/images/mercury.png
+    - assets/images/jupiter.png
+    - assets/images/space_image2.jpg
+    - assets/images/space_image1.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
