@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 
 class LoginAPI {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -26,6 +29,8 @@ class LoginAPI {
     try {
       UserCredential result = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
+      print("Logged in");
+      await uploadDataToFirestore();
       return result.user;
     } catch (error) {
       print(error.toString());
@@ -53,6 +58,32 @@ class LoginAPI {
     } catch (error) {
       print(error.toString());
       return null;
+    }
+  }
+
+  Future<void> uploadDataToFirestore() async {
+    // 1. Read and parse the JSON file
+    String jsonString = await rootBundle.loadString('assets/Sat.json');
+    Map<String, dynamic> jsonData = json.decode(jsonString);
+    // print(jsonData.);
+
+    // Reference to Firestore collection
+    CollectionReference satellites =
+        FirebaseFirestore.instance.collection('Satellites');
+
+    // 2. Iterate through each satellite entry
+    // print(jsonData['Sheet1'].length);
+    for (dynamic satellite in jsonData['Sheet1']) {
+      // 3. Upload each satellite to Firestore
+      print(satellite["Current Official Name of Satellite"]
+          .toString()
+          .replaceAll('/', '-'));
+      await satellites
+          .doc(satellite["Current Official Name of Satellite"]
+              .toString()
+              .replaceAll('/', '-'))
+          .set(satellite);
+      print("Uploading....");
     }
   }
 }
