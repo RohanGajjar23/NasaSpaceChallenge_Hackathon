@@ -1,9 +1,6 @@
-<<<<<<< Updated upstream
 import 'dart:developer';
 
-=======
 import 'package:demo_app_with_intigration/EventsManager/eventsApi.dart';
->>>>>>> Stashed changes
 import 'package:demo_app_with_intigration/Screens/home_screen.dart';
 import 'package:demo_app_with_intigration/models/solar_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -45,11 +42,7 @@ class LoginAPI {
       UserCredential result = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       print("Logged in");
-<<<<<<< Updated upstream
-
-=======
       apodURL.apodimg = (await SpaceDevsService().fetchAndUploadImage());
->>>>>>> Stashed changes
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const HomeScreen(),
       ));
