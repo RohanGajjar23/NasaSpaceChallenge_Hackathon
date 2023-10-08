@@ -2,7 +2,6 @@ import 'package:demo_app_with_intigration/widgets/animation/model.dart/tab_item.
 import 'package:demo_app_with_intigration/widgets/animation/theme_animation.dart';
 import 'package:demo_app_with_intigration/widgets/consts/assets_animate.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:rive/rive.dart' hide LinearGradient;
 
 class CustomTabBar extends StatefulWidget {

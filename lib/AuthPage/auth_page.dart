@@ -1,10 +1,10 @@
-import 'package:demo_app_with_intigration/AuthPage/LoginAPI.dart';
-import 'package:demo_app_with_intigration/AuthPage/LoginPage.dart';
-import 'package:demo_app_with_intigration/AuthPage/regsiterPage.dart';
-import 'package:demo_app_with_intigration/EventsManager/eventsApi.dart';
-import 'package:demo_app_with_intigration/Theme/theme.dart';
+import 'package:demo_app_with_intigration/AuthPage/login_api.dart';
+import 'package:demo_app_with_intigration/AuthPage/login_page.dart';
+import 'package:demo_app_with_intigration/AuthPage/register_page.dart';
+// import 'package:demo_app_with_intigration/EventsManager/eventsApi.dart';
+// import 'package:demo_app_with_intigration/Theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:googleapis/apigeeregistry/v1.dart';
+// import 'package:googleapis/apigeeregistry/v1.dart';
 import 'package:provider/provider.dart';
 
 class AuthPage extends StatefulWidget {
@@ -24,7 +24,7 @@ class _AuthPageState extends State<AuthPage> {
   @override
   void initState() {
     super.initState();
-    print("Temp");
+    // print("Temp");
     Position.leftPosi = -400; // Set the initial position
 
     // Give it a small delay to initiate animation after the widget builds
@@ -42,9 +42,9 @@ class _AuthPageState extends State<AuthPage> {
 
   void bottomSheet(Size size, BuildContext context) {
     final isloading =
-        Provider.of<loadingProvider>(context, listen: false).isLoading;
+        Provider.of<LoadingProvider>(context, listen: false).isLoading;
     setState(() {
-      Provider.of<loadingProvider>(context, listen: false).OpenClose();
+      Provider.of<LoadingProvider>(context, listen: false).openClose();
     });
     !isloading
         ? showModalBottomSheet(
@@ -61,7 +61,7 @@ class _AuthPageState extends State<AuthPage> {
             builder: (context) {
               return StatefulBuilder(
                 builder: (context, setState) {
-                  return Container(
+                  return SizedBox(
                     height: onRegisterPage
                         ? size.height / 1.3 +
                             MediaQuery.of(context).viewInsets.bottom
@@ -73,7 +73,7 @@ class _AuthPageState extends State<AuthPage> {
                         Container(
                           // color: Colors.greenAccent,
                           child: onRegisterPage
-                              ? RegsiterPage(
+                              ? RegisterPage(
                                   fontSize: fontSize,
                                   size: MediaQuery.of(context).size)
                               : LoginPage(
@@ -103,8 +103,8 @@ class _AuthPageState extends State<AuthPage> {
                                 borderRadius: BorderRadius.circular(15)),
                             child: Text(
                               !onRegisterPage ? "Register!" : "Login!",
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                              style: const TextStyle(
+                                  fontSize: 20, color: Colors.white),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -116,22 +116,22 @@ class _AuthPageState extends State<AuthPage> {
               );
             }).then((value) {
             setState(() {
-              Provider.of<loadingProvider>(context, listen: false).OpenClose();
+              Provider.of<LoadingProvider>(context, listen: false).openClose();
             });
           })
-        : SizedBox();
+        : const SizedBox();
   }
 
-  void ChangePage() {
-    print("Chaning Page");
-    onRegisterPage = !onRegisterPage;
-  }
+  // void ChangePage() {
+  //   print("Chaning Page");
+  //   onRegisterPage = !onRegisterPage;
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final bottom = MediaQuery.of(context).viewInsets.bottom;
-    final isloading = context.watch<loadingProvider>().isLoading;
-    bool isOpen = context.watch<loadingProvider>().isopen;
+    // final bottom = MediaQuery.of(context).viewInsets.bottom;
+    // final isloading = context.watch<LoadingProvider>().isLoading;
+    bool isOpen = context.watch<LoadingProvider>().isopen;
     final size = MediaQuery.of(context).size;
     return Material(
       child: Stack(children: [
@@ -157,12 +157,12 @@ class _AuthPageState extends State<AuthPage> {
               left: size.width / 3.3,
               top: size.height / 2.5,
               child: AnimatedOpacity(
-                duration: Duration(seconds: 1),
+                duration: const Duration(seconds: 1),
                 opacity: textOpacity,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
+                    SizedBox(
                       // color: Colors.green,
                       height: size.height / 15,
                       child: Text(
@@ -173,7 +173,7 @@ class _AuthPageState extends State<AuthPage> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       // color: Colors.red,
                       height: size.height / 15,
                       child: Text(
@@ -209,7 +209,7 @@ class _AuthPageState extends State<AuthPage> {
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
                             ),
-                            Icon(Icons.arrow_forward_ios_outlined)
+                            const Icon(Icons.arrow_forward_ios_outlined)
                           ],
                         ),
                       ),

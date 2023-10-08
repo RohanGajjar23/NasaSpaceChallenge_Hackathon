@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo_app_with_intigration/pages/screen1.dart';
 import 'package:demo_app_with_intigration/pages/screen2.dart';
 import 'package:demo_app_with_intigration/widgets/consts/const_widgets.dart';
@@ -7,11 +6,9 @@ import 'package:flutter/physics.dart';
 import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
 
-class apodURL {
+class ApodURL {
   static String apodimg = '';
 }
-
-final _firebase = FirebaseFirestore.instance;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,8 +27,8 @@ class _HomeScreenState extends State<HomeScreen>
   late SMIBool _menuBtn;
 
   final List<Widget> _screens = [
-    const Screen_One(),
-    const Screen_Two(),
+    const ScreenOne(),
+    const ScreenTwo(),
   ];
 
   final springDesc = const SpringDescription(
@@ -71,7 +68,6 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       bottomNavigationBar: TabBar(

@@ -1,20 +1,23 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:demo_app_with_intigration/AuthPage/LoginAPI.dart';
-import 'package:demo_app_with_intigration/Screens/planetUI.dart';
+import 'package:demo_app_with_intigration/AuthPage/login_api.dart';
 import 'package:demo_app_with_intigration/models/solar_model.dart';
 import 'package:demo_app_with_intigration/widgets/consts/animated_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:page_transition/page_transition.dart';
 
-class Screen_One extends StatefulWidget {
-  const Screen_One({super.key});
+import '../Screens/planet_ui.dart';
+
+class ScreenOne extends StatefulWidget {
+  const ScreenOne({super.key});
 
   @override
-  State<Screen_One> createState() => _Screen_OneState();
+  State<ScreenOne> createState() => _ScreenOneState();
 }
 
-class _Screen_OneState extends State<Screen_One> {
+class _ScreenOneState extends State<ScreenOne> {
   List<SolarModel> model = [];
   late SolarModel planet;
 
@@ -98,7 +101,7 @@ class _Screen_OneState extends State<Screen_One> {
                     //   width: size.width / 1,
                     // ),
                     CachedNetworkImage(
-                      imageUrl: apodURL.apodimg,
+                      imageUrl: ApodURL.apodimg,
                       alignment: Alignment.center,
                       fit: BoxFit.cover,
                       placeholder: (context, url) =>
@@ -150,12 +153,12 @@ class _Screen_OneState extends State<Screen_One> {
                         physics: const BouncingScrollPhysics(),
                         itemCount: model.length,
                         itemBuilder: (context, index) {
-                          print(model.length);
+                          log(model.length);
                           return InkWell(
                             onTap: () {
                               setState(() {
                                 Navigator.of(context).push(PageTransition(
-                                    child: planetUI(model: model[index]),
+                                    child: PlanetUI(model: model[index]),
                                     type: PageTransitionType.fade));
                               });
                             },

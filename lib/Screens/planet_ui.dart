@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:demo_app_with_intigration/models/solar_model.dart';
@@ -6,20 +7,19 @@ import 'package:babylonjs_viewer/babylonjs_viewer.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
-class planetUI extends StatefulWidget {
-  planetUI({super.key, required this.model});
+class PlanetUI extends StatefulWidget {
+  const PlanetUI({super.key, required this.model});
   final SolarModel model;
 
   @override
-  State<planetUI> createState() => _planetUIState();
+  State<PlanetUI> createState() => _PlanetUIState();
 }
 
-class _planetUIState extends State<planetUI> {
+class _PlanetUIState extends State<PlanetUI> {
   bool isloading = true;
   late File f;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     downloadFile();
   }
@@ -33,8 +33,8 @@ class _planetUIState extends State<planetUI> {
       file.writeAsBytesSync(response.bodyBytes);
       setState(() {
         f = file;
-        print(f.toString());
-        print(f.uri.toString());
+        log(f.toString());
+        log(f.uri.toString());
         isloading = false;
       });
       // Handle file download and save
@@ -43,7 +43,7 @@ class _planetUIState extends State<planetUI> {
       // and then use `setState` to trigger a rebuild if needed.
     } else {
       // Handle error
-      print("Error");
+      log("Error");
     }
   }
 
@@ -53,7 +53,7 @@ class _planetUIState extends State<planetUI> {
     return Stack(
       children: [
         !isloading
-            ? Container(
+            ? SizedBox(
                 width: size.width,
                 height: size.height,
                 child: BabylonJSViewer(src: f.uri.toString()))
@@ -66,7 +66,7 @@ class _planetUIState extends State<planetUI> {
                     width: 50,
                     height: 50,
                     color: Colors.black,
-                    child: CircularProgressIndicator(
+                    child: const CircularProgressIndicator(
                       color: Colors.green,
                     ),
                   ),
@@ -81,7 +81,7 @@ class _planetUIState extends State<planetUI> {
             width: size.width / 1.75,
             height: size.height / 3,
             alignment: Alignment.bottomLeft,
-            color: Color.fromARGB(0, 0, 0, 0),
+            color: const Color.fromARGB(0, 0, 0, 0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

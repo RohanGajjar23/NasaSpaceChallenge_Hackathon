@@ -1,6 +1,5 @@
-import 'package:demo_app_with_intigration/AuthPage/AuthPage.dart';
-import 'package:demo_app_with_intigration/AuthPage/LoginAPI.dart';
-import 'package:demo_app_with_intigration/Screens/home_screen.dart';
+import 'package:demo_app_with_intigration/AuthPage/auth_page.dart';
+import 'package:demo_app_with_intigration/AuthPage/login_api.dart';
 import 'package:demo_app_with_intigration/Theme/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,11 +20,11 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<loadingProvider>(
-          create: (context) => loadingProvider(),
+        ChangeNotifierProvider<LoadingProvider>(
+          create: (context) => LoadingProvider(),
         )
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
   // runApp(const MyApp());

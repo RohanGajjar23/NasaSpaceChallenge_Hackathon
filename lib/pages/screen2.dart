@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo_app_with_intigration/models/satellite_model.dart';
 import 'package:flutter/material.dart';
 
-class Screen_Two extends StatefulWidget {
-  const Screen_Two({super.key});
+class ScreenTwo extends StatefulWidget {
+  const ScreenTwo({super.key});
 
   @override
-  State<Screen_Two> createState() => _Screen_TwoState();
+  State<ScreenTwo> createState() => _ScreenTwoState();
 }
 
-class _Screen_TwoState extends State<Screen_Two> {
+class _ScreenTwoState extends State<ScreenTwo> {
   List<SatelliteModel> models = [];
 
   @override

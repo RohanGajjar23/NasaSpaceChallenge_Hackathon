@@ -1,8 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
-import 'package:demo_app_with_intigration/EventsManager/eventsApi.dart';
+import 'package:demo_app_with_intigration/EventsManager/events_api.dart';
 import 'package:demo_app_with_intigration/Screens/home_screen.dart';
-import 'package:demo_app_with_intigration/models/solar_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'dart:convert';
@@ -11,34 +12,34 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class apodURL {
+class ApodURL {
   static String apodimg = '';
 }
 
-class loadingProvider with ChangeNotifier {
+class LoadingProvider with ChangeNotifier {
   bool isLoading = false;
   bool isopen = false;
 
-  void OpenClose() {
+  void openClose() {
     isopen = !isopen;
     notifyListeners();
   }
 
-  void OpenLoading() {
+  void openLoading() {
     isLoading = true;
-    print("Called $isLoading");
+    log("Called $isLoading");
     notifyListeners();
-    loadingProvider.delayedBack();
+    LoadingProvider.delayedBack();
   }
 
   static Future<void> delayedBack() async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     // SystemNavigator.pop();
   }
 
-  void CloseLoading() {
+  void closeLoading() {
     isLoading = false;
-    print("Called $isLoading");
+    log("Called $isLoading");
     notifyListeners();
   }
 }
@@ -46,7 +47,6 @@ class loadingProvider with ChangeNotifier {
 class LoginAPI {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
-  final FirebaseFirestore _firebase = FirebaseFirestore.instance;
 
   // Register with email and password
   Future<User?> registerWithEmailAndPassword(
@@ -57,8 +57,8 @@ class LoginAPI {
 
       return result.user;
     } catch (error) {
-      print("error");
-      print(error.toString());
+      log("error");
+      log(error.toString());
       return null;
     }
   }
@@ -67,21 +67,21 @@ class LoginAPI {
   Future<User?> signInWithEmailAndPassword(
       String email, String password, BuildContext context) async {
     try {
-      final LoadingProvider =
-          Provider.of<loadingProvider>(context, listen: false);
+      final loadingProvider =
+          Provider.of<LoadingProvider>(context, listen: false);
       UserCredential result = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      print("Logged in");
+      log("Logged in");
       // await uploadDataToFirestore();
-      LoadingProvider.OpenLoading();
-      apodURL.apodimg = (await SpaceDevsService().fetchAndUploadImage());
+      loadingProvider.openLoading();
+      ApodURL.apodimg = (await SpaceDevsService().fetchAndUploadImage());
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const HomeScreen(),
       ));
-      LoadingProvider.CloseLoading();
+      loadingProvider.closeLoading();
       return result.user;
     } catch (error) {
-      print(error.toString());
+      log(error.toString());
       return null;
     }
   }
@@ -104,9 +104,10 @@ class LoginAPI {
         return result.user;
       }
     } catch (error) {
-      print(error.toString());
+      log(error.toString());
       return null;
     }
+    return null;
   }
 
   // Future<List<SolarModel>> getPlanets() async {
@@ -131,7 +132,7 @@ class LoginAPI {
     // print(jsonData['Sheet1'].length);
     for (dynamic satellite in jsonData['Sheet1']) {
       // 3. Upload each satellite to Firestore
-      print(satellite["Current Official Name of Satellite"]
+      log(satellite["Current Official Name of Satellite"]
           .toString()
           .replaceAll('/', '-'));
       await satellites
@@ -139,7 +140,7 @@ class LoginAPI {
               .toString()
               .replaceAll('/', '-'))
           .set(satellite);
-      print("Uploading....");
+      log("Uploading....");
     }
   }
 }

@@ -1,7 +1,6 @@
 import 'package:demo_app_with_intigration/widgets/animation/model.dart/menu_item.dart';
 import 'package:demo_app_with_intigration/widgets/consts/assets_animate.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:rive/rive.dart';
 // import 'package:flutter_samples/samples/ui/rive_app/models/menu_item.dart';
 
