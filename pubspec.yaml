@@ -87,7 +87,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/animations/Login.json
     - assets/BG.jpg
     - assets/BG2.jpg
     - assets/Sat.json
@@ -97,6 +96,12 @@ flutter:
     - assets/images/jupiter.png
     - assets/images/space_image2.jpg
     - assets/images/space_image1.jpg
+    - assets/animations/2.json
+    - assets/animations/3.json
+    - assets/animations/4.json
+    - assets/animations/5.json
+    - assets/animations/asteroid.json
+    - assets/animations/try.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

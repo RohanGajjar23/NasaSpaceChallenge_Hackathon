@@ -1,16 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:demo_app_with_intigration/models/solar_model.dart';
 import 'package:demo_app_with_intigration/pages/screen1.dart';
 import 'package:demo_app_with_intigration/pages/screen2.dart';
 import 'package:demo_app_with_intigration/pages/screen3.dart';
 import 'package:demo_app_with_intigration/pages/screen4.dart';
-import 'package:demo_app_with_intigration/pages/screen5.dart';
-import 'package:demo_app_with_intigration/widgets/animation/theme_animation.dart';
-import 'package:demo_app_with_intigration/widgets/navigation/custom_tab_bar.dart';
+import 'package:demo_app_with_intigration/widgets/consts/const_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
+
+class apodURL {
+  static String apodimg = '';
+}
 
 final _firebase = FirebaseFirestore.instance;
 
@@ -21,22 +22,20 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController? _animationController;
   late AnimationController? _onBoardingAnimController;
-  late Animation<double> _onBoardingAnim;
-  late Animation<double> _sidebarAnim;
+
+  late TabController _tabController;
 
   late SMIBool _menuBtn;
 
-  bool _showOnBoarding = false;
-  Widget _tabBody = Container(color: RiveAppTheme.background);
   final List<Widget> _screens = [
     const Screen_One(),
     const Screen_Two(),
     const Screen_Three(),
     const Screen_Four(),
-    const Screen_Five(),
   ];
 
   final springDesc = const SpringDescription(
@@ -61,28 +60,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 200),
-      upperBound: 1,
-      vsync: this,
-    );
-    _onBoardingAnimController = AnimationController(
-      duration: const Duration(milliseconds: 350),
-      upperBound: 1,
-      vsync: this,
-    );
+    _tabController = TabController(length: 4, vsync: this);
 
-    _sidebarAnim = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
-      parent: _animationController!,
-      curve: Curves.linear,
-    ));
-
-    _onBoardingAnim = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
-      parent: _onBoardingAnimController!,
-      curve: Curves.linear,
-    ));
-
-    // _tabBody = _screens.first;
     super.initState();
   }
 
@@ -90,40 +69,62 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void dispose() {
     _animationController?.dispose();
     _onBoardingAnimController?.dispose();
+    _tabController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: _tabBody,
-      bottomNavigationBar: RepaintBoundary(
-        child: AnimatedBuilder(
-          animation: !_showOnBoarding ? _sidebarAnim : _onBoardingAnim,
-          builder: (context, child) {
-            return Transform.translate(
-              offset: Offset(
-                  0,
-                  !_showOnBoarding
-                      ? _sidebarAnim.value * 300
-                      : _onBoardingAnim.value * 200),
-              child: child,
-            );
-          },
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              CustomTabBar(
-                onTabChange: (tabIndex) {
-                  setState(() {
-                    _tabBody = _screens[tabIndex];
-                  });
-                },
-              )
-            ],
+      body: Stack(
+        children: [
+          TabBarView(
+            controller: _tabController,
+            physics: const BouncingScrollPhysics(
+              decelerationRate: ScrollDecelerationRate.normal,
+            ),
+            children: _screens,
           ),
-        ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SafeArea(
+              child: Container(
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(size.width / 10),
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                child: TabBar(
+                  dividerColor: Colors.white,
+                  splashBorderRadius: BorderRadius.circular(40),
+                  indicatorColor: Colors.white,
+                  labelColor: Colors.white,
+                  indicatorPadding: const EdgeInsets.only(bottom: 6),
+                  indicatorSize: TabBarIndicatorSize.label,
+                  unselectedLabelColor: Colors.white60,
+                  physics: const BouncingScrollPhysics(),
+                  controller: _tabController,
+                  tabs: [
+                    Tab(
+                      child: buildSticker(image: image4),
+                    ),
+                    Tab(
+                      child: buildSticker(image: image5),
+                    ),
+                    Tab(
+                      child: buildSticker(image: image6),
+                    ),
+                    Tab(
+                      child: buildSticker(image: image3),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

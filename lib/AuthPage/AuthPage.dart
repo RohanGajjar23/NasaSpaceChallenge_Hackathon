@@ -14,7 +14,7 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  Duration animSpeed = Duration(milliseconds: 500);
+  Duration animSpeed = const Duration(milliseconds: 500);
   double fontSize = 25;
   double textOpacity = 0.0;
   bool onRegisterPage = true;
@@ -28,12 +28,12 @@ class _AuthPageState extends State<AuthPage> {
     Position.leftPosi = -400; // Set the initial position
 
     // Give it a small delay to initiate animation after the widget builds
-    Future.delayed(Duration(milliseconds: 1), () {
+    Future.delayed(const Duration(milliseconds: 1), () {
       setState(() {
         Position.leftPosi = -125; // Animate to a left position of 0
       });
     });
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         textOpacity = 1.0; // Fully show the text after 2 seconds
       });
@@ -60,11 +60,7 @@ class _AuthPageState extends State<AuthPage> {
           return StatefulBuilder(
             builder: (context, setState) {
               return Container(
-                height: onRegisterPage
-                    ? size.height / 1.3 +
-                        MediaQuery.of(context).viewInsets.bottom
-                    : size.height / 1.75 +
-                        MediaQuery.of(context).viewInsets.bottom,
+                height: onRegisterPage ? size.height / 2 : size.height / 2.5,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -101,7 +97,8 @@ class _AuthPageState extends State<AuthPage> {
                             borderRadius: BorderRadius.circular(15)),
                         child: Text(
                           !onRegisterPage ? "Register!" : "Login!",
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          style: const TextStyle(
+                              fontSize: 20, color: Colors.white),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -150,7 +147,7 @@ class _AuthPageState extends State<AuthPage> {
             left: size.width / 3.3,
             top: size.height / 2.5,
             child: AnimatedOpacity(
-              duration: Duration(seconds: 1),
+              duration: const Duration(seconds: 1),
               opacity: textOpacity,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -188,7 +185,27 @@ class _AuthPageState extends State<AuthPage> {
                       // onTap: () async {
                       //   await SpaceDevsService().downloadImage();
                       // },
-                      
+                      // onTap: () async {
+                      //   List events =
+                      //       await SpaceDevsService().getUpcomingLaunches();
+                      //   for (var e in events) {
+                      //     print('Name: ${e['name']}');
+
+                      //     var status = e['status'];
+                      //     if (status != null) {
+                      //       print('Status Name: ${status['name']}');
+                      //       print(
+                      //           'Status Description: ${status['description']}');
+                      //     }
+                      //     var provider = e['launch_service_provider'];
+                      //     if (provider != null) {
+                      //       print('Provider Name: ${provider['name']}');
+                      //       print('Provider Type: ${provider['type']}');
+                      //     }
+
+                      //     print('---'); // Separator for readability
+                      //   }
+                      // },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -202,7 +219,7 @@ class _AuthPageState extends State<AuthPage> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                           ),
-                          Icon(Icons.arrow_forward_ios_outlined)
+                          const Icon(Icons.arrow_forward_ios_outlined)
                         ],
                       ),
                     ),

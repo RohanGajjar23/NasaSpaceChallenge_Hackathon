@@ -9,7 +9,6 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class apodURL {
   static String apodimg = '';
@@ -35,7 +34,7 @@ class LoginAPI {
     }
   }
 
-  // Sign in with email and password
+  // Sign in with email and passwords
   Future<User?> signInWithEmailAndPassword(
       String email, String password, BuildContext context) async {
     try {

@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Screen_Two extends StatelessWidget {
@@ -5,14 +8,22 @@ class Screen_Two extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        "Nothing yet",
-        style: Theme.of(context)
-            .textTheme
-            .bodyLarge!
-            .copyWith(color: Theme.of(context).colorScheme.onBackground),
-      ),
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection("Satellites").snapshots(),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+          case ConnectionState.none:
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          case ConnectionState.active:
+          case ConnectionState.done:
+            final data = snapshot.data!.docs;
+            // log(data[0].);
+            return Container();
+        }
+      },
     );
   }
 }

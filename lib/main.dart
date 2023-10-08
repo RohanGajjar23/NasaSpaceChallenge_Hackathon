@@ -51,9 +51,9 @@ class _MyAppState extends State<MyApp> {
               );
             case ConnectionState.active:
             case ConnectionState.done:
-            // if (snapshot.hasData && snapshot.data != null) {
-            //   return const HomeScreen();
-            // }
+              if (snapshot.hasData && snapshot.data != null) {
+                return const HomeScreen();
+              }
           }
           return const AuthPage();
         },

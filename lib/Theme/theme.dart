@@ -9,7 +9,7 @@ ThemeData darkTheme = ThemeData(
     onBackground: Colors.white,
     primary: Color.fromARGB(255, 3, 0, 52),
     onPrimary: Colors.white,
-    secondary: Color.fromARGB(255, 187, 184, 255),
+    secondary: Color.fromARGB(255, 69, 68, 74),
     onSecondary: Colors.black,
     secondaryContainer: Colors.white,
     onPrimaryContainer: Color.fromARGB(210, 0, 0, 0),
