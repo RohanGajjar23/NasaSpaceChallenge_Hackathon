@@ -19,50 +19,44 @@ class SpaceDevsService {
     }
   }
 
-  
-
   final String apodUrl = 'https://api.nasa.gov/planetary/apod';
 
 // Provide your NASA API key here
   final String apiKey = 'KIr6eY8tbHVVqdx07tjUgdbqRMO4aU2ZHbQSfbo3';
 
-  // Future<File> downloadImage() async {
-  //   // Fetch the APOD data from NASA API
-  //   final response = await http.get(Uri.parse('$apodUrl?api_key=$apiKey'));
-  //   if (response.statusCode == 200) {
-  //     // If the server returns an OK response, parse the JSON
-  //     Map<String, dynamic> data = json.decode(response.body);
-  //     String imageUrl = data['url'];
+  Future<String> fetchAndUploadImage() async {
+    // Fetch the APOD data from NASA API
+    final response = await http.get(Uri.parse('$apodUrl?api_key=$apiKey'));
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = json.decode(response.body);
+      String imageUrl = data['url'];
 
-  //     // Fetch the image
-  //     final responseImage = await http.get(Uri.parse(imageUrl));
-  //     if (responseImage.statusCode == 200) {
-  //       // If the server returns an OK response, save the image
-  //       final directory = await getTemporaryDirectory();
-  //       final filePath = '${directory.path}/apod.jpg';
-  //       File file = File(filePath);
-  //       file.writeAsBytes(responseImage.bodyBytes);
-  //       print("Found the img $filePath");
-  //     final ext = file.path.split(".").last;
-  //     final ref = FirebaseStorage.instance
-  //         .ref()
-  //         .child('Picture of the Day/image.$ext');
+      // Fetch the image
+      final responseImage = await http.get(Uri.parse(imageUrl));
+      if (responseImage.statusCode == 200) {
+        // Save the image
+        final directory = await getTemporaryDirectory();
+        final filePath = '${directory.path}/apod.jpg';
+        File file = File(filePath);
+        file.writeAsBytesSync(responseImage.bodyBytes);
 
-  //     //storage file in ref with path
+        final ext = file.path.split(".").last;
+        final ref = FirebaseStorage.instance
+            .ref()
+            .child('Picture of the Day/image.$ext');
 
-  //     //uploading image
-  //     await ref
-  //         .putFile(file, SettableMetadata(contentType: 'image/$ext'))
-  //         .then((p0) async {
+        // Upload to Firebase
+        await ref.putFile(file, SettableMetadata(contentType: 'image/$ext'));
 
-  //       final String img = await ref.getDownloadURL();
-  //       return
-  //     } else {
-  //       throw Exception('Failed to load image');
-  //     })
-  //   } else {
-  //     throw Exception('Failed to load APOD data');
-  //   }
-  // }
+        // Get and return the download URL
+        final String downloadUrl = await ref.getDownloadURL();
+        return downloadUrl;
+      } else {
+        throw Exception('Failed to load image');
+      }
+    } else {
+      throw Exception('Failed to load APOD data');
+    }
+  }
 }
 // }
