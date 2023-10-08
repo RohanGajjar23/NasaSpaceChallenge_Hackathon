@@ -57,6 +57,7 @@ dependencies:
   http: ^1.1.0
   firebase_storage: ^11.2.8
   cached_network_image: ^3.3.0
+  babylonjs_viewer: ^1.2.1
   # downloads_path_provider: ^0.2.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -102,6 +103,14 @@ flutter:
     - assets/animations/5.json
     - assets/animations/asteroid.json
     - assets/animations/try.json
+    - assets/3dmodels/Earth.glb
+    - assets/3dmodels/Jupiter.glb
+    - assets/3dmodels/Mars.glb
+    - assets/3dmodels/Mercury.glb
+    - assets/3dmodels/Neptune.glb
+    - assets/3dmodels/Uranus.glb
+    - assets/3dmodels/Venus.glb
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

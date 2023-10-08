@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo_app_with_intigration/AuthPage/LoginAPI.dart';
+import 'package:demo_app_with_intigration/Screens/planetUI.dart';
 import 'package:demo_app_with_intigration/models/solar_model.dart';
 import 'package:demo_app_with_intigration/widgets/consts/animated_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Screen_One extends StatefulWidget {
   const Screen_One({super.key});

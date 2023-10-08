@@ -9,9 +9,38 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class apodURL {
   static String apodimg = '';
+}
+
+class loadingProvider with ChangeNotifier {
+  bool isLoading = false;
+  bool isopen = false;
+
+  void OpenClose() {
+    isopen = !isopen;
+    notifyListeners();
+  }
+
+  void OpenLoading() {
+    isLoading = true;
+    print("Called $isLoading");
+    notifyListeners();
+    loadingProvider.delayedBack();
+  }
+
+  static Future<void> delayedBack() async {
+    await Future.delayed(Duration(seconds: 1));
+    // SystemNavigator.pop();
+  }
+
+  void CloseLoading() {
+    isLoading = false;
+    print("Called $isLoading");
+    notifyListeners();
+  }
 }
 
 class LoginAPI {
@@ -38,13 +67,17 @@ class LoginAPI {
   Future<User?> signInWithEmailAndPassword(
       String email, String password, BuildContext context) async {
     try {
+      final LoadingProvider =
+          Provider.of<loadingProvider>(context, listen: false);
       UserCredential result = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       print("Logged in");
+      LoadingProvider.OpenLoading();
       apodURL.apodimg = (await SpaceDevsService().fetchAndUploadImage());
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const HomeScreen(),
       ));
+      LoadingProvider.CloseLoading();
       return result.user;
     } catch (error) {
       print(error.toString());
