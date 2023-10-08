@@ -18,10 +18,13 @@ class Screen_One extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Welcome ,",
+              "Welcome, User",
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   color: Theme.of(context).colorScheme.onBackground,
                   fontSize: size.width / 10),
+            ),
+            SizedBox(
+              height: size.height / 90,
             ),
 
             Row(
