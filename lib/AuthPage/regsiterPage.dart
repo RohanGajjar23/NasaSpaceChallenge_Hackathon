@@ -22,7 +22,8 @@ class _RegsiterPageState extends State<RegsiterPage> {
       duration: const Duration(milliseconds: 100),
       alignment: Alignment.center,
       width: widget.size.width / 2,
-      height: widget.size.height / 2.5,
+      height:
+          widget.size.height / 2.5 + MediaQuery.of(context).viewInsets.bottom,
       color: const Color.fromARGB(0, 0, 0, 0),
       child: SingleChildScrollView(
         child: Column(

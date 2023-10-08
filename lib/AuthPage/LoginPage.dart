@@ -20,7 +20,8 @@ class _LoginPageState extends State<LoginPage> {
       duration: const Duration(milliseconds: 100),
       alignment: Alignment.center,
       width: widget.size.width / 2,
-      height: widget.size.height / 3.75,
+      height:
+          widget.size.height / 3.75 + MediaQuery.of(context).viewInsets.bottom,
       color: const Color.fromARGB(0, 0, 0, 0),
       child: SingleChildScrollView(
         child: Column(
