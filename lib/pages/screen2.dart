@@ -18,7 +18,7 @@ class _Screen_TwoState extends State<Screen_Two> {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection("Satellites")
-          .where('Contractor', isEqualTo: "NASA")
+          .where('Country of Contractor', isEqualTo: "India")
           .snapshots(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
