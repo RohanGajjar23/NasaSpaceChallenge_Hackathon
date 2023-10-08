@@ -1,8 +1,10 @@
+import 'package:demo_app_with_intigration/Screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 
 class LoginAPI {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -25,12 +27,14 @@ class LoginAPI {
 
   // Sign in with email and password
   Future<User?> signInWithEmailAndPassword(
-      String email, String password) async {
+      String email, String password, BuildContext context) async {
     try {
       UserCredential result = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       print("Logged in");
-      await uploadDataToFirestore();
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => HomeScreen(),
+      ));
       return result.user;
     } catch (error) {
       print(error.toString());

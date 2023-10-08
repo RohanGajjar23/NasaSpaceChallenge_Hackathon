@@ -73,7 +73,8 @@ class _LoginPageState extends State<LoginPage> {
             InkWell(
               onTap: () {
                 setState(() {
-                  LoginAPI().signInWithEmailAndPassword(email, password);
+                  LoginAPI()
+                      .signInWithEmailAndPassword(email, password, context);
                   emailController.clear();
                   passwordController.clear();
                 });

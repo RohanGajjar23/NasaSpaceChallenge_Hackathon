@@ -1,5 +1,4 @@
 import 'package:demo_app_with_intigration/AuthPage/AuthPage.dart';
-import 'package:demo_app_with_intigration/Screens/home_screen.dart';
 import 'package:demo_app_with_intigration/Theme/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -39,25 +38,25 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: darkTheme,
-      home: const HomeScreen(),
-      // home: StreamBuilder(
-      //   stream: FirebaseAuth.instance.authStateChanges(),
-      //   builder: (context, snapshot) {
-      //     switch (snapshot.connectionState) {
-      //       case ConnectionState.waiting:
-      //       case ConnectionState.none:
-      //         return const Center(
-      //           child: CircularProgressIndicator(),
-      //         );
-      //       case ConnectionState.active:
-      //       case ConnectionState.done:
-      //         if (snapshot.hasData && snapshot.data != null) {
-      //           return const HomeScreen();
-      //         }
-      //     }
-      //     return const AuthPage();
-      //   },
-      // ),
+      // home: const AuthPage(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+            case ConnectionState.none:
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            case ConnectionState.active:
+            case ConnectionState.done:
+            // if (snapshot.hasData && snapshot.data != null) {
+            //   return const HomeScreen();
+            // }
+          }
+          return const AuthPage();
+        },
+      ),
       // // theme: ThemeData(
       //   textTheme: GoogleFonts.comfortaaTextTheme(),
       // ),
