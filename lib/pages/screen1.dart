@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:ffi';
-
 import 'package:demo_app_with_intigration/models/solar_model.dart';
 import 'package:demo_app_with_intigration/widgets/consts/animated_tile.dart';
 import 'package:flutter/material.dart';

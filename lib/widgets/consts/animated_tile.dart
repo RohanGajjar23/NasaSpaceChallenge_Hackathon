@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:demo_app_with_intigration/models/solar_model.dart';
 import 'package:flutter/material.dart';
+
+import '../../models/solar_model.dart';
 
 class PlanetTile extends StatelessWidget {
   const PlanetTile({super.key, required this.model});
