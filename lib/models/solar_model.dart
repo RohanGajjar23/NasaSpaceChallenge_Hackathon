@@ -1,14 +1,14 @@
 class SolarModel {
-  SolarModel({
-    required this.images,
-    required this.moons,
-    required this.mass,
-    required this.distanceSun,
-    required this.name,
-    required this.description,
-    required this.radius,
-    required this.distanceEarth,
-  });
+  SolarModel(
+      {required this.images,
+      required this.moons,
+      required this.mass,
+      required this.distanceSun,
+      required this.name,
+      required this.description,
+      required this.radius,
+      required this.distanceEarth,
+      required this.model});
   late final String images;
   late final int moons;
   late final String mass;
@@ -17,6 +17,7 @@ class SolarModel {
   late final String description;
   late final String radius;
   late final String distanceEarth;
+  late final String model;
 
   SolarModel.fromJson(Map<String, dynamic> json) {
     images = json['images'] ?? '';
@@ -27,6 +28,7 @@ class SolarModel {
     description = json['description'] ?? '';
     radius = json['radius'] ?? '';
     distanceEarth = json['distance_earth'] ?? '';
+    model = json['model'] ?? '';
   }
 
   Map<String, dynamic> toJson() {
@@ -39,6 +41,7 @@ class SolarModel {
     data['description'] = description;
     data['radius'] = radius;
     data['distance_earth'] = distanceEarth;
+    data['model'] = model;
     return data;
   }
 }

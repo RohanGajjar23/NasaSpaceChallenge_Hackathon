@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo_app_with_intigration/AuthPage/LoginAPI.dart';
+import 'package:demo_app_with_intigration/Screens/planetUI.dart';
 import 'package:demo_app_with_intigration/models/solar_model.dart';
 import 'package:demo_app_with_intigration/widgets/consts/animated_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Screen_One extends StatefulWidget {
   const Screen_One({super.key});
@@ -70,6 +72,7 @@ class _Screen_OneState extends State<Screen_One> {
                 //   height: size.height / 2,
                 //   width: size.width / 1,
                 // ),
+
                 CachedNetworkImage(imageUrl: apodURL.apodimg),
 
                 SizedBox(
@@ -104,8 +107,21 @@ class _Screen_OneState extends State<Screen_One> {
                     physics: const BouncingScrollPhysics(),
                     itemCount: model.length,
                     itemBuilder: (context, index) {
-                      return PlanetTile(
-                        model: model[index],
+                      return Container(
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              Navigator.of(context).push(PageTransition(
+                                  child: planetUI(
+                                    model: model[index],
+                                  ),
+                                  type: PageTransitionType.fade));
+                            });
+                          },
+                          child: PlanetTile(
+                            model: model[index],
+                          ),
+                        ),
                       );
                     },
                   ),
