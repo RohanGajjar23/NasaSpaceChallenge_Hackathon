@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo_app_with_intigration/pages/screen1.dart';
 import 'package:demo_app_with_intigration/pages/screen2.dart';
-import 'package:demo_app_with_intigration/pages/screen3.dart';
-import 'package:demo_app_with_intigration/pages/screen4.dart';
 import 'package:demo_app_with_intigration/widgets/consts/const_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
@@ -34,8 +32,6 @@ class _HomeScreenState extends State<HomeScreen>
   final List<Widget> _screens = [
     const Screen_One(),
     const Screen_Two(),
-    const Screen_Three(),
-    const Screen_Four(),
   ];
 
   final springDesc = const SpringDescription(
@@ -60,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   void initState() {
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
 
     super.initState();
   }
@@ -78,53 +74,31 @@ class _HomeScreenState extends State<HomeScreen>
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: Stack(
-        children: [
-          TabBarView(
-            controller: _tabController,
-            physics: const BouncingScrollPhysics(
-              decelerationRate: ScrollDecelerationRate.normal,
-            ),
-            children: _screens,
+      bottomNavigationBar: TabBar(
+        dividerColor: Colors.white,
+        splashBorderRadius: BorderRadius.circular(40),
+        indicatorColor: Colors.white,
+        labelColor: Colors.white,
+        indicatorPadding: const EdgeInsets.only(bottom: 6),
+        indicatorSize: TabBarIndicatorSize.label,
+        unselectedLabelColor: Colors.white60,
+        physics: const BouncingScrollPhysics(),
+        controller: _tabController,
+        tabs: [
+          Tab(
+            child: buildSticker(image: image4),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SafeArea(
-              child: Container(
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(size.width / 10),
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-                child: TabBar(
-                  dividerColor: Colors.white,
-                  splashBorderRadius: BorderRadius.circular(40),
-                  indicatorColor: Colors.white,
-                  labelColor: Colors.white,
-                  indicatorPadding: const EdgeInsets.only(bottom: 6),
-                  indicatorSize: TabBarIndicatorSize.label,
-                  unselectedLabelColor: Colors.white60,
-                  physics: const BouncingScrollPhysics(),
-                  controller: _tabController,
-                  tabs: [
-                    Tab(
-                      child: buildSticker(image: image4),
-                    ),
-                    Tab(
-                      child: buildSticker(image: image5),
-                    ),
-                    Tab(
-                      child: buildSticker(image: image6),
-                    ),
-                    Tab(
-                      child: buildSticker(image: image3),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          Tab(
+            child: buildSticker(image: image5),
           ),
         ],
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        physics: const BouncingScrollPhysics(
+          decelerationRate: ScrollDecelerationRate.normal,
+        ),
+        children: _screens,
       ),
     );
   }

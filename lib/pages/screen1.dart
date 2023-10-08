@@ -35,6 +35,16 @@ class _Screen_OneState extends State<Screen_One> {
             );
           case ConnectionState.active:
           case ConnectionState.done:
+            if (snapshot.data == null) {
+              return Center(
+                child: Text(
+                  "No Data Yet",
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: size.width / 10),
+                ),
+              );
+            }
             final data = snapshot.data!;
             model =
                 data.docs.map((e) => SolarModel.fromJson(e.data())).toList();

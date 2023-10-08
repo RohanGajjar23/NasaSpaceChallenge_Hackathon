@@ -1,15 +1,25 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo_app_with_intigration/models/satellite_model.dart';
 import 'package:flutter/material.dart';
 
-class Screen_Two extends StatelessWidget {
+class Screen_Two extends StatefulWidget {
   const Screen_Two({super.key});
 
   @override
+  State<Screen_Two> createState() => _Screen_TwoState();
+}
+
+class _Screen_TwoState extends State<Screen_Two> {
+  List<SatelliteModel> models = [];
+
+  @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection("Satellites").snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection("Satellites")
+          .where('Contractor', isEqualTo: "NASA")
+          .snapshots(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
@@ -19,9 +29,73 @@ class Screen_Two extends StatelessWidget {
             );
           case ConnectionState.active:
           case ConnectionState.done:
-            final data = snapshot.data!.docs;
-            // log(data[0].);
-            return Container();
+            if (snapshot.data == null) {
+              return Center(
+                child: Text(
+                  "No Data Yet",
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: size.width / 10),
+                ),
+              );
+            }
+            final data = snapshot.data!;
+            models = data.docs
+                .map((e) => SatelliteModel.fromJson(e.data()))
+                .toList();
+
+            return SafeArea(
+              child: Column(
+                children: [
+                  Text(
+                    "Satellites",
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontSize: 60,
+                          color: Colors.white,
+                        ),
+                  ),
+                  SizedBox(
+                    height: size.height / 90,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: models.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.all(8.0),
+                          decoration:
+                              const BoxDecoration(color: Colors.white10),
+                          child: ListTile(
+                            title: Text(
+                              models[index].name,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    fontSize: 30,
+                                    color: Colors.white,
+                                  ),
+                            ),
+                            subtitle: Text(
+                              models[index].country,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    fontSize: 30,
+                                    color: Colors.white,
+                                  ),
+                            ),
+                            trailing:
+                                const Icon(Icons.arrow_forward_ios_outlined),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
         }
       },
     );
