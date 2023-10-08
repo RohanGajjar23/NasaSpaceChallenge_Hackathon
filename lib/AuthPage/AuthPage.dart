@@ -60,7 +60,11 @@ class _AuthPageState extends State<AuthPage> {
           return StatefulBuilder(
             builder: (context, setState) {
               return Container(
-                height: onRegisterPage ? size.height / 2 : size.height / 2.5,
+                height: onRegisterPage
+                    ? size.height / 1.3 +
+                        MediaQuery.of(context).viewInsets.bottom
+                    : size.height / 1.75 +
+                        MediaQuery.of(context).viewInsets.bottom,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -184,27 +188,7 @@ class _AuthPageState extends State<AuthPage> {
                       // onTap: () async {
                       //   await SpaceDevsService().downloadImage();
                       // },
-                      // onTap: () async {
-                      //   List events =
-                      //       await SpaceDevsService().getUpcomingLaunches();
-                      //   for (var e in events) {
-                      //     print('Name: ${e['name']}');
-
-                      //     var status = e['status'];
-                      //     if (status != null) {
-                      //       print('Status Name: ${status['name']}');
-                      //       print(
-                      //           'Status Description: ${status['description']}');
-                      //     }
-                      //     var provider = e['launch_service_provider'];
-                      //     if (provider != null) {
-                      //       print('Provider Name: ${provider['name']}');
-                      //       print('Provider Type: ${provider['type']}');
-                      //     }
-
-                      //     print('---'); // Separator for readability
-                      //   }
-                      // },
+                      
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
