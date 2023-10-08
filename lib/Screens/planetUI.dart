@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:demo_app_with_intigration/models/solar_model.dart';
 import 'package:flutter/material.dart';
 import 'package:babylonjs_viewer/babylonjs_viewer.dart';
-import 'package:googleapis/servicemanagement/v1.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 

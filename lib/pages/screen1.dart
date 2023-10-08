@@ -27,7 +27,7 @@ class _Screen_OneState extends State<Screen_One> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('Milky_Way').snapshots(),
+      stream: FirebaseFirestore.instance.collection('Planets').snapshots(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
@@ -144,13 +144,24 @@ class _Screen_OneState extends State<Screen_One> {
                       padding:
                           EdgeInsets.symmetric(horizontal: size.width / 90),
                       height: size.height / 3,
+                      // color: Colors.green,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         physics: const BouncingScrollPhysics(),
                         itemCount: model.length,
                         itemBuilder: (context, index) {
-                          return PlanetTile(
-                            model: model[index],
+                          print(model.length);
+                          return InkWell(
+                            onTap: () {
+                              setState(() {
+                                Navigator.of(context).push(PageTransition(
+                                    child: planetUI(model: model[index]),
+                                    type: PageTransitionType.fade));
+                              });
+                            },
+                            child: PlanetTile(
+                              model: model[index],
+                            ),
                           );
                         },
                       ),

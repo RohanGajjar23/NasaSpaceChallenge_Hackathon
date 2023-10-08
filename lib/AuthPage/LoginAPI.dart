@@ -72,6 +72,7 @@ class LoginAPI {
       UserCredential result = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       print("Logged in");
+      await uploadDataToFirestore();
       LoadingProvider.OpenLoading();
       apodURL.apodimg = (await SpaceDevsService().fetchAndUploadImage());
       Navigator.of(context).push(MaterialPageRoute(

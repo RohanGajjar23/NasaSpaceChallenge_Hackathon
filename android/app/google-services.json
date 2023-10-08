@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "499549956818",
-    "project_id": "nasaproject-1ac8c",
-    "storage_bucket": "nasaproject-1ac8c.appspot.com"
+    "project_number": "851014026520",
+    "project_id": "nasa-project-36c9e",
+    "storage_bucket": "nasa-project-36c9e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:499549956818:android:7a237f8a5a9a7a443a9b0b",
+        "mobilesdk_app_id": "1:851014026520:android:85d24f5d94c1609f950a6d",
         "android_client_info": {
           "package_name": "com.example.nasaspaceapp"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCVvGa1b-B3v4GUYIN1kkGpBQ_ngpXpg6Y"
+          "current_key": "AIzaSyBk7Iqst3_7L1Ma6rYuIJxkrGnu3N3wv1k"
         }
       ],
       "services": {

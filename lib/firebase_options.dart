@@ -44,38 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyD2J6AIvDxBVXubkUhnHs7pxwUJUB9kWGI',
-    appId: '1:499549956818:web:dc3c62240dfdfbf93a9b0b',
-    messagingSenderId: '499549956818',
-    projectId: 'nasaproject-1ac8c',
-    authDomain: 'nasaproject-1ac8c.firebaseapp.com',
-    storageBucket: 'nasaproject-1ac8c.appspot.com',
-    measurementId: 'G-747R479P9B',
+    apiKey: 'AIzaSyDY9vPDdtlmZ3uW1h2KrdXgaE8S9sww92o',
+    appId: '1:851014026520:web:e761f41fdfc7b2d1950a6d',
+    messagingSenderId: '851014026520',
+    projectId: 'nasa-project-36c9e',
+    authDomain: 'nasa-project-36c9e.firebaseapp.com',
+    storageBucket: 'nasa-project-36c9e.appspot.com',
+    measurementId: 'G-D12MEKYHV1',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCVvGa1b-B3v4GUYIN1kkGpBQ_ngpXpg6Y',
-    appId: '1:499549956818:android:7a237f8a5a9a7a443a9b0b',
-    messagingSenderId: '499549956818',
-    projectId: 'nasaproject-1ac8c',
-    storageBucket: 'nasaproject-1ac8c.appspot.com',
+    apiKey: 'AIzaSyBk7Iqst3_7L1Ma6rYuIJxkrGnu3N3wv1k',
+    appId: '1:851014026520:android:85d24f5d94c1609f950a6d',
+    messagingSenderId: '851014026520',
+    projectId: 'nasa-project-36c9e',
+    storageBucket: 'nasa-project-36c9e.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyClQnDIYPu2K9TMwylHXKxFIynNE1-FoK8',
-    appId: '1:499549956818:ios:fa85c37f4f7d874b3a9b0b',
-    messagingSenderId: '499549956818',
-    projectId: 'nasaproject-1ac8c',
-    storageBucket: 'nasaproject-1ac8c.appspot.com',
+    apiKey: 'AIzaSyBwZFQqb-kGwfMMLIqOtrcgjrellJOH3as',
+    appId: '1:851014026520:ios:c302e938dc126451950a6d',
+    messagingSenderId: '851014026520',
+    projectId: 'nasa-project-36c9e',
+    storageBucket: 'nasa-project-36c9e.appspot.com',
     iosBundleId: 'com.example.nasaspaceapp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyClQnDIYPu2K9TMwylHXKxFIynNE1-FoK8',
-    appId: '1:499549956818:ios:d1d1227a221c676d3a9b0b',
-    messagingSenderId: '499549956818',
-    projectId: 'nasaproject-1ac8c',
-    storageBucket: 'nasaproject-1ac8c.appspot.com',
+    apiKey: 'AIzaSyBwZFQqb-kGwfMMLIqOtrcgjrellJOH3as',
+    appId: '1:851014026520:ios:1923e39af412f2b8950a6d',
+    messagingSenderId: '851014026520',
+    projectId: 'nasa-project-36c9e',
+    storageBucket: 'nasa-project-36c9e.appspot.com',
     iosBundleId: 'com.example.nasaspaceapp.RunnerTests',
   );
 }
