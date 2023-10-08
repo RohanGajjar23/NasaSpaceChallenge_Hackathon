@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -22,7 +21,7 @@ Future<void> main() async {
   //     child: MyApp(),
   //   ),
   // );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -39,18 +38,26 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: darkTheme,
+      // home: const AuthPage(),
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
-            return AuthPage();
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+            case ConnectionState.none:
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            case ConnectionState.active:
+            case ConnectionState.done:
+            // if (snapshot.hasData && snapshot.data != null) {
+            //   return const HomeScreen();
+            // }
           }
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return const AuthPage();
         },
       ),
-      // theme: ThemeData(
+      // // theme: ThemeData(
       //   textTheme: GoogleFonts.comfortaaTextTheme(),
       // ),
       // theme: darkTheme,
