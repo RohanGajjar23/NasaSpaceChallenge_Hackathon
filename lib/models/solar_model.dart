@@ -1,66 +1,44 @@
 class SolarModel {
-  late String name;
-  late String description;
-  late String distanceFromsun;
-  late String distancefromearth;
-  late String mass;
-  late String radius;
-  late int moons;
-  late String image;
-
   SolarModel({
+    required this.images,
+    required this.moons,
+    required this.mass,
+    required this.distanceSun,
     required this.name,
     required this.description,
-    required this.distanceFromsun,
-    required this.distancefromearth,
-    required this.mass,
     required this.radius,
-    required this.moons,
-    required this.image,
+    required this.distanceEarth,
   });
-}
+  late final String images;
+  late final int moons;
+  late final String mass;
+  late final String distanceSun;
+  late final String name;
+  late final String description;
+  late final String radius;
+  late final String distanceEarth;
 
-List<SolarModel> parseSolarData(List<Map<String, dynamic>> jsonData) {
-  List<SolarModel> solarList = [];
-
-  for (var data in jsonData) {
-    SolarModel solarModel = SolarModel(
-      name: data['name'],
-      description: data['description'],
-      distanceFromsun: data['distance_sun'],
-      distancefromearth: data['distance_earth'],
-      mass: data['mass'],
-      radius: data['radius'],
-      moons: data['moons'],
-      image: '', // Add the image URL here if available in your JSON
-    );
-
-    solarList.add(solarModel);
+  SolarModel.fromJson(Map<String, dynamic> json) {
+    images = json['images'] ?? '';
+    moons = json['moons'] ?? 0;
+    mass = json['mass'] ?? '';
+    distanceSun = json['distance _sun'] ?? '';
+    name = json['name'] ?? '';
+    description = json['description'] ?? '';
+    radius = json['radius'] ?? '';
+    distanceEarth = json['distance_earth'] ?? '';
   }
 
-  return solarList;
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['images'] = images;
+    data['moons'] = moons;
+    data['mass'] = mass;
+    data['distance _sun'] = distanceSun;
+    data['name'] = name;
+    data['description'] = description;
+    data['radius'] = radius;
+    data['distance_earth'] = distanceEarth;
+    return data;
+  }
 }
-
-List<SolarModel> planet = [
-  SolarModel(
-    name: "Earth",
-    description: "Our home planet...",
-    mass: "5.972 × 10^24 kg",
-    radius: "6,371 km",
-    distanceFromsun: "149.6 million km",
-    distancefromearth: "0 km",
-    moons: 1,
-    image: "assets/images/mercury.png",
-  )
-];
-// void main() {
-//   // Assuming 'planets' contains your JSON data
-//   List<SolarModel> solarObjects = parseSolarData(planets);
-
-//   // Now, you have a list of SolarModel objects
-//   for (var solarModel in solarObjects) {
-//     print('Name: ${solarModel.name}');
-//     print('Description: ${solarModel.description}');
-//     // Print other properties as needed
-//   }
-// }

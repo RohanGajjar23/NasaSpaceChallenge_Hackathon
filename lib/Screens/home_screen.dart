@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo_app_with_intigration/models/solar_model.dart';
 import 'package:demo_app_with_intigration/pages/screen1.dart';
 import 'package:demo_app_with_intigration/pages/screen2.dart';
 import 'package:demo_app_with_intigration/pages/screen3.dart';
@@ -9,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
+
+final _firebase = FirebaseFirestore.instance;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

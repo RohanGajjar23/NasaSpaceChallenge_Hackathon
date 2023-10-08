@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:demo_app_with_intigration/models/solar_model.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class PlanetTile extends StatelessWidget {
   const PlanetTile({super.key, required this.model});
@@ -58,13 +59,20 @@ class PlanetTile extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Image.asset(
-                "assets/images/jupiter.png",
-                height: size.width / 1.5,
-                width: size.width / 1.5,
+                child: CachedNetworkImage(
+              imageUrl: model.images,
+              height: size.height / 4,
+              width: size.height / 4,
+              alignment: Alignment.center,
+              fit: BoxFit.cover,
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Image.asset(
+                'assets/images/jupiter.png',
+                height: size.height / 4,
+                width: size.height / 4,
                 fit: BoxFit.cover,
               ),
-            ),
+            )),
             SizedBox(
               width: size.width / 20,
             ),

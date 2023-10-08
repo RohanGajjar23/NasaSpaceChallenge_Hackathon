@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:demo_app_with_intigration/Screens/home_screen.dart';
+import 'package:demo_app_with_intigration/models/solar_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'dart:convert';
@@ -9,6 +12,7 @@ import 'package:flutter/material.dart';
 class LoginAPI {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
+  final FirebaseFirestore _firebase = FirebaseFirestore.instance;
 
   // Register with email and password
   Future<User?> registerWithEmailAndPassword(
@@ -32,8 +36,9 @@ class LoginAPI {
       UserCredential result = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       print("Logged in");
+
       Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => HomeScreen(),
+        builder: (context) => const HomeScreen(),
       ));
       return result.user;
     } catch (error) {
@@ -64,6 +69,14 @@ class LoginAPI {
       return null;
     }
   }
+
+  // Future<List<SolarModel>> getPlanets() async {
+  //   final data = await _firebase.collection("Milky_Way").snapshots();
+  //   log(data.toString());
+  //   final doc = data.docs.map((e) => (SolarModel.fromMap(e.data()))).toList();
+  //   log(data.docs[0].toString());
+  //   return doc;
+  // }
 
   Future<void> uploadDataToFirestore() async {
     // 1. Read and parse the JSON file

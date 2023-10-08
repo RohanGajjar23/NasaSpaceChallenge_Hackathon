@@ -1,4 +1,5 @@
 import 'package:demo_app_with_intigration/AuthPage/AuthPage.dart';
+import 'package:demo_app_with_intigration/Screens/home_screen.dart';
 import 'package:demo_app_with_intigration/Theme/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
