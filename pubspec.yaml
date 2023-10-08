@@ -37,6 +37,7 @@ dependencies:
   firebase_database: ^10.2.5
   cloud_firestore: ^4.9.0
   lottie: ^2.6.0
+  rive: ^0.11.17
   page_transition: ^2.0.9
   google_sign_in: ^6.1.5
   googleapis: ^11.4.0
@@ -89,6 +90,9 @@ flutter:
     - assets/BG.jpg
     - assets/BG2.jpg
     - assets/Sat.json
+    - assets/rive/icons.riv
+    - assets/images/space.jpg
+    - assets/images/mercury.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
