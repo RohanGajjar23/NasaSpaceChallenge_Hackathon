@@ -61,15 +61,15 @@ class PlanetTile extends StatelessWidget {
             Expanded(
                 child: CachedNetworkImage(
               imageUrl: model.images,
-              height: size.height / 4,
-              width: size.height / 4,
+              height: size.height / 6,
+              width: size.height / 6,
               alignment: Alignment.center,
               fit: BoxFit.cover,
               placeholder: (context, url) => const CircularProgressIndicator(),
               errorWidget: (context, url, error) => Image.asset(
                 'assets/images/jupiter.png',
-                height: size.height / 4,
-                width: size.height / 4,
+                height: size.height / 6,
+                width: size.height / 6,
                 fit: BoxFit.cover,
               ),
             )),
